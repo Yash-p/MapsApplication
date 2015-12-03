@@ -66,6 +66,7 @@ public class MapsActivity extends FragmentActivity {
                         .title("Marker")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinmarker))
                         .flat(true)
+                        .draggable(true)
         );
 
     }
