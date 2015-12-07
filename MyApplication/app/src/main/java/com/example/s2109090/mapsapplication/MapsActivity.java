@@ -2,14 +2,18 @@ package com.example.s2109090.mapsapplication;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
+
+    Marker Austin;
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -61,13 +65,25 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(0, 0))
-                        .title("Marker")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinmarker))
+        Austin = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(30.2500,97.7500))
+                .snippet("Population: 4,137,400")
+                .title("Austin")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinmarker))
                         .flat(true)
-                        .draggable(true)
         );
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.equals(Austin))
+                {
+                    Toast.makeText(MapsActivity.this, "Here is you starting position", Toast.LENGTH_SHORT);
+                    Austin.setSnippet("Your new clue is");
+                }else{
 
+                }
+                return false;
+            }
+        });
     }
 }
